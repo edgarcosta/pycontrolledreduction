@@ -32,7 +32,7 @@ kwds = {"include_dirs": sage_include_directories()}
 
 extensions = [
     Extension('pycontrolled_reduction.controlled_reduction',
-               sources = [ ["pycontrolled_reduction/controlled_reduction.pyx"],
+               sources = ['pycontrolled_reduction/controlled_reduction.pyx'],
                language='c++',
                libraries = ["gmp", "flint", "ntl", "mpir", "mpfr"], **kwds)
 ]
