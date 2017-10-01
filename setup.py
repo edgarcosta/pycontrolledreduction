@@ -22,7 +22,7 @@ class SageTest(TestCommand):
         if errno != 0:
             sys.exit(1)
 
-if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlled-reduction", "wrapper.h")):
+if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlledreduction", "wrapper.h")):
     print("The controlled reduction library is not installed.")
     sys.exit(1)
 
@@ -32,9 +32,9 @@ kwds = {"include_dirs": sage_include_directories()}
 
 
 extensions = [
-    Extension('pycontrolled_reduction.controlled_reduction',
+    Extension('pycontrolledreduction.controllereduction',
               language="c++",
-              sources = ['pycontrolled_reduction/controlled_reduction.pyx'], 
+              sources = ['pycontrolledreduction/controlledreduction.pyx'], 
                libraries = ["gmp", "flint", "ntl", "mpir", "mpfr"], 
               **kwds)
 ]
