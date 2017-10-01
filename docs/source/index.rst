@@ -17,7 +17,7 @@ Pycontrolled-reduction
 .. toctree::
    :maxdepth: 1
 
-   deformation
+   controlled-reduction
 
 
 Indices and Tables
