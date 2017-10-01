@@ -2,6 +2,7 @@
 # See LICENSE file for license details.
 # distutils: language = C++
 # distutils: libraries = controlled-reduction
+# clang C++
 
 from sage.libs.ntl.types cimport ZZX_c
 from libcpp.vector cimport vector
