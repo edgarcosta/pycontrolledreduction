@@ -18,11 +18,11 @@ def readfile(filename):
 # For the tests
 class SageTest(TestCommand):
     def run_tests(self):
-        errno = os.system("sage -t --force-lib pycontrolled-reduction")
+        errno = os.system("sage -t --force-lib pycontrolled_reduction")
         if errno != 0:
             sys.exit(1)
 
-if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlled-reduction", "controlled-reduction.h")):
+if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlled_reduction", "controlled_reduction.h")):
     print("The controlled reduction library is not installed.")
     sys.exit(1)
 
@@ -35,10 +35,10 @@ extensions = [
 ]
 
 setup(
-    name="pycontrolled-reduction",
+    name="pycontrolled_reduction",
     author="Edgar Costa, Jennifer Balakrishnan",
     author_email="edgarcosta@math.dartmouth.edu",
-    url="https://github.com/jpflori/pycontrolled-reduction",
+    url="https://github.com/edgarcosta/pycontrolled_reduction",
     license="GNU General Public License, version 2 or 3",
     description="Wrapper for controlled reduction library by Edgar Costa",
     long_description = readfile("README.rst"), # get the long description from the README
@@ -57,7 +57,7 @@ setup(
     keywords = "sagemath controlled reduction",
     setup_requires=["cython", "sagemath"], # currently useless, see https://www.python.org/dev/peps/pep-0518/
     install_requires=["cython", "sagemath"],
-    packages=["pycontrolled-reduction"],
+    packages=["pycontrolled_reduction"],
     include_package_data = True,
     ext_modules = cythonize(extensions),
     cmdclass = {'test': SageTest} # adding a special setup command for tests
