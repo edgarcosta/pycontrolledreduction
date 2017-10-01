@@ -1,5 +1,6 @@
 # Copyright 2017 Jennifer Balakrishnan, Edgar Costa 
 # See LICENSE file for license details.
+# distutils: libraries = controlled-reduction
 
 from sage.libs.ntl.types cimport ZZX_c
 from libcpp.vector cimport vector
