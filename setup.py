@@ -63,7 +63,7 @@ setup(
     keywords = "sagemath controlled reduction",
     setup_requires=["cython", "sagemath"], # currently useless, see https://www.python.org/dev/peps/pep-0518/
     install_requires=["cython", "sagemath"],
-    packages=["pycontrolled_reduction"],
+    packages=["pycontrolledreduction"],
     include_package_data = True,
     ext_modules = cythonize(extensions, language="c++"),
     cmdclass = {'test': SageTest} # adding a special setup command for tests
