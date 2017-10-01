@@ -9,7 +9,7 @@ from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.polynomial_ring import PolynomialRing
 from sage.libs.ntl.ntl_ZZX cimport ntl_ZZX
 
-def controlled_reduction(f, p, verbose = False):
+def controlledreduction(f, p, verbose = False):
     cdef vector[int64_t] coef
     cdef vector[ vector[int64_t] ] keys
     for mvec, c in f.dict().iteritems():
