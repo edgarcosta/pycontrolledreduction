@@ -34,7 +34,8 @@ extensions = [
     Extension('pycontrolled_reduction.controlled_reduction',
                sources = ['pycontrolled_reduction/controlled_reduction.pyx'],
                language='c++',
-               libraries = ["gmp", "flint", "ntl", "mpir", "mpfr"], **kwds)
+               libraries = ["gmp", "flint", "ntl", "mpir", "mpfr"], 
+              **kwds)
 ]
 
 setup(
