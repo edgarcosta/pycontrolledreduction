@@ -6,6 +6,8 @@ from cysignals.signals cimport sig_on, sig_off
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.polynomial_ring import PolynomialRing
 from sage.libs.ntl.ntl_ZZX cimport ntl_ZZX
+from libcpp.vector cimport vector
+from libcpp.cstdint cimport int64_t
 
 def controlled_reduction(f, p, verbose = False):
     cdef vector[int64_t] coef
