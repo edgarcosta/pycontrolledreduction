@@ -1,6 +1,7 @@
 # Copyright 2017 Jennifer Balakrishnan, Edgar Costa 
 # See LICENSE file for license details.
 # distutils: language = C++
+# clang C++
 
 from cysignals.signals cimport sig_on, sig_off
 from sage.rings.integer_ring import ZZ
