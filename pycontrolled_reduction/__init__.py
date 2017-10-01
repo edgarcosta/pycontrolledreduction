@@ -1,0 +1,2 @@
+from controlled_reduction import controlled_reduction 
+assert controlled_reduction
