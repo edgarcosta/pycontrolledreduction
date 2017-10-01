@@ -65,7 +65,7 @@ setup(
     install_requires=["cython", "sagemath"],
     packages=["pycontrolled_reduction"],
     include_package_data = True,
-    ext_modules = cythonize(extensions),
+    ext_modules = cythonize(extensions, language="c++"),
     cmdclass = {'test': SageTest} # adding a special setup command for tests
     #ext_modules = extensions,
     #cmdclass = {'test': SageTest, 'build_ext': Cython.Build.build_ext} # adding a special setup command for tests and build_ext
