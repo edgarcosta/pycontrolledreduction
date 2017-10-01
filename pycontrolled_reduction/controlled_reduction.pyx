@@ -18,7 +18,7 @@ def controlled_reduction(f, p, verbose = False):
     cdef ntl_ZZX zeta = ntl_ZZX()
     cdef int cverbose = int(verbose);
 
-    zeta_function(zeta.x, keys, coef, p, verbose)
+    zeta_function(zeta.x, keys, coef, p, cverbose)
     # convert zeta to a sage polynomial
     poly=[]
     for i in range(zeta.degree()+1):
