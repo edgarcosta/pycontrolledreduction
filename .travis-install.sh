@@ -14,6 +14,6 @@ fi
 MAKE="make -j4"
 export MAKE
 # Install packages
-SageMath/sage -i controlled-reduction
+SageMath/sage -i controlledreduction
 # To initialize matplotlib font manager
 SageMath/sage -python -c 'import matplotlib.pyplot'

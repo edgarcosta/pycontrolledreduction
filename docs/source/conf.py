@@ -16,7 +16,7 @@
 project = u"A wrapper around Edgar Costa's controlled reduction code"
 copyright = u'2017, JB and EC'
 package_name = 'pycontrolledreduction'
-package_folder = "../../../pycontrolled-reduction"
+package_folder = "../../../pycontrolledreduction"
 authors = u" Jennifer Balakrishnan andEdgar Costa"
 
 import sys

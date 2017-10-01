@@ -1,23 +1,23 @@
 =============
-Pycontrolled-reduction
+pycontrolledreduction
 =============
 
 This is a wrapper around Edgar Costa's controlled reduction code.
 
 To use this module, you need to import it:: 
 
-    from pycontrolled-reduction import *
+    from pycontrolledreduction import *
 
 This work is licensed under  `GPL v2 or v3`.
 
 
-Pycontrolled-reduction
+pycontrolledreduction
 =============
 
 .. toctree::
    :maxdepth: 1
 
-   controlled-reduction
+   controlledreduction
 
 
 Indices and Tables
