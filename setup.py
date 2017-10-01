@@ -22,7 +22,7 @@ class SageTest(TestCommand):
         if errno != 0:
             sys.exit(1)
 
-if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlled_reduction", "controlled_reduction.h")):
+if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlled-reduction", "wrapper.h")):
     print("The controlled reduction library is not installed.")
     sys.exit(1)
 
