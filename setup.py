@@ -31,7 +31,10 @@ cythonize_dir = "build"
 kwds = {"include_dirs": sage_include_directories()}
 
 extensions = [
-    Extension("pycontrolled_reduction.controlled_reduction", ["pycontrolled_reduction/controlled_reduction.pyx"], **kwds)
+    Extension('pycontrolled_reduction.controlled_reduction',
+               sources = [ ["pycontrolled_reduction/controlled_reduction.pyx"],
+               language='c++',
+               libraries = ["gmp", "flint", "ntl", "mpir", "mpfr"], **kwds)
 ]
 
 setup(
