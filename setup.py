@@ -34,13 +34,11 @@ kwds = {"include_dirs": sage_include_directories()}
 extensions = [
     Extension('pycontrolled_reduction.controlled_reduction',
                sources = ['pycontrolled_reduction/controlled_reduction.pyx'],
-               language='c++',
+               language='C++',
                libraries = ["gmp", "flint", "ntl", "mpir", "mpfr"], 
               **kwds)
 ]
-extensions = [
-    Extension("pydeformation.deformation", ["pydeformation/deformation.pyx"], **kwds)
-]
+#extensions = [Extension("pydeformation.deformation", ["pydeformation/deformation.pyx"], **kwds)]
 
 setup(
     name="pycontrolled_reduction",
