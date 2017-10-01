@@ -18,7 +18,7 @@ def readfile(filename):
 # For the tests
 class SageTest(TestCommand):
     def run_tests(self):
-        errno = os.system("sage -t --force-lib pycontrolled_reduction")
+        errno = os.system("sage -t --force-lib pycontrolledreduction")
         if errno != 0:
             sys.exit(1)
 
@@ -41,10 +41,10 @@ extensions = [
 #extensions = [Extension("pydeformation.deformation", ["pydeformation/deformation.pyx"], **kwds)]
 
 setup(
-    name="pycontrolled_reduction",
-    author="Edgar Costa, Jennifer Balakrishnan",
+    name="pycontrolledreduction",
+    author="Jennifer Balakrishnan, Edgar Costa",
     author_email="edgarcosta@math.dartmouth.edu",
-    url="https://github.com/edgarcosta/pycontrolled_reduction",
+    url="https://github.com/edgarcosta/pycontrolledreduction",
     license="GNU General Public License, version 2 or 3",
     description="Wrapper for controlled reduction library by Edgar Costa",
     long_description = readfile("README.rst"), # get the long description from the README
