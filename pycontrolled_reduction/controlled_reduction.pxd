@@ -5,7 +5,7 @@
 
 from sage.libs.ntl.types cimport ZZX_c
 from libcpp.vector cimport vector
-from libcpp.cstdint cimport int64_t
+from libc.stdint cimport int64_t
 from libcpp cimport bool
 
 cdef extern from "controlled-reduction/wrapper.h":
