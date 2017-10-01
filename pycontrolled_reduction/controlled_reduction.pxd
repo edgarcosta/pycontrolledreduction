@@ -9,4 +9,4 @@ from libcpp.cstdint cimport int64_t
 from libcpp cimport bool
 
 cdef extern from "controlled-reduction/wrapper.h":
-    void zeta_function(ZZX_c &zeta, vector[ vector[int64_t] ] &monomials, vector[int64_t] &coef, int64_t p,  bool verbose);
+    void zeta_function(ZZX_c &zeta, const vector[ vector[int64_t] ] &monomials, const vector[int64_t] &coef, const int64_t &p,  bool verbose);
