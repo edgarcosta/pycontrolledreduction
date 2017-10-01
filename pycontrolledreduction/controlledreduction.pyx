@@ -18,8 +18,10 @@ def controlledreduction(f, p, verbose = False):
         keys.push_back(mvec)
     cdef ntl_ZZX zeta = ntl_ZZX()
     cdef int cverbose = int(verbose);
-
+    
+    sig_on()
     zeta_function(zeta.x, keys, coef, p, cverbose)
+    sig_off()
     # convert zeta to a sage polynomial
     poly=[]
     for i in range(zeta.degree()+1):
