@@ -1,2 +1,2 @@
-from controlled_reduction import controlled_reduction 
-assert controlled_reduction
+from controlledreduction import controlledreduction 
+assert controlledreduction
