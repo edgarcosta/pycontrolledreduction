@@ -31,7 +31,7 @@ cythonize_dir = "build"
 kwds = {"include_dirs": sage_include_directories()}
 
 extensions = [
-    Extension("pycontrolled-reduction.controlled-reduction", ["pycontrolled-reduction/controlled-reduction.pyx"], **kwds)
+    Extension("pycontrolled_reduction.controlled_reduction", ["pycontrolled_reduction/controlled_reduction.pyx"], **kwds)
 ]
 
 setup(
