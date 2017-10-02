@@ -6,8 +6,7 @@
 
 from cysignals.signals cimport sig_on, sig_off
 from sage.rings.integer_ring import ZZ
-#from sage.rings.polynomial.polynomial_ring import PolynomialRing
-from sage.all import PolynomialRing
+from sage.all import PolynomialRing, Ideal, GF
 from sage.libs.ntl.ntl_ZZX cimport ntl_ZZX
 
 def controlledreduction(f, p, verbose = False):

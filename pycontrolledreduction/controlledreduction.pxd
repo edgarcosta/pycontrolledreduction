@@ -1,7 +1,6 @@
 # distutils: language=c++
 # Copyright 2017 Jennifer Balakrishnan, Edgar Costa 
 # See LICENSE file for license details.
-# distutils: libraries = controlledreduction
 # clang c++
 
 from sage.libs.ntl.types cimport ZZX_c
