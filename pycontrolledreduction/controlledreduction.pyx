@@ -46,8 +46,7 @@ def controlledreduction(f, p, verbose = False):
 
     nd_range  = [(2,3), (2,4), (2,5), (3,4), (3,5)]
     if (len(f.variables()) - 1, f.total_degree()) not in nd_range:
-        raise ValueError(r"""for the moment we have only precomputed some internal parameters for (n, d) in %s,\nif you need to compute outside this range please email "Edgar Costa" <edgarcosta@math.dartmouth.edu>.
-        """ % nd_range)
+        raise ValueError('for the moment we have only precomputed some internal parameters for (n, d) in %s,\nif you need to compute outside this range please email "Edgar Costa" <edgarcosta@math.dartmouth.edu>.' % nd_range)
 
 
     cdef vector[int64_t] coef
