@@ -1,0 +1,3 @@
+[submodule "controlledreduction"]
+	path = pycontrolledreduction/controlledreduction
+	url = git@github.com:edgarcosta/controlledreduction.git
