@@ -34,15 +34,22 @@ def controlledreduction(f, p, verbose = False):
     True 
     """
     if not f.is_homogeneous():
-        raise TypeError('f must be homoegeneous');
+        raise ValueError('f must be homoegeneous');
     if not f.total_degree() >= len(f.variables()):
-        raise TypeError('the degree of f must be larger than the dimension of the ambient projective space')
+        raise ValueError('the degree of f must be larger than the dimension of the ambient projective space')
     if  f.total_degree() % p == 0:
-        raise TypeError('the total degree of f cannot be zero modulo p')
+        raise ValueError('the total degree of f cannot be zero modulo p')
 
     I = f.change_ring(GF(p)).jacobian_ideal().radical()
     if I != Ideal(I.gens()):
-        raise TypeError('f is not smooth modulo p')
+        raise ValueError('f is not smooth modulo p')
+
+    nd_range  = [(2,3), (2,4), (2,5), (3,4), (3,5)]
+    if (f.total_degree(), f.variables() - 1) not in nd_range:
+        raise ValueError(r"""
+        for the moment we have only precomputed some internal parameters for (n, d) in %s, if you need to compute outside this range please email "Edgar Costa" <edgarcosta@math.dartmouth.edu>.
+        """ % nd_range)
+
 
     cdef vector[int64_t] coef
     cdef vector[ vector[int64_t] ] keys
