@@ -33,7 +33,7 @@ def controlledreduction(f, p, verbose = False):
     sage: controlledreduction(y^2*z + y*z^2 - (x^3 + y*x^2 -2*x*z^2), 97, false).list() == EllipticCurve([0, 1, 1, -2, 0]).change_ring(GF(97)).frobenius_polynomial().reverse().list()
     True 
     """
-    if not f.is_homogenous():
+    if not f.is_homogeneous():
         raise TypeError('f must be homoegeneous');
     if not f.total_degree() >= len(f.variables()):
         raise TypeError('the degree of f must be larger than the dimension of the ambient projective space')
