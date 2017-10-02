@@ -44,7 +44,7 @@ def controlledreduction(f, p, verbose = False):
     if I != Ideal(I.gens()):
         raise ValueError('f is not smooth modulo p')
 
-    nd_range  = [(2,3), (2,4), (2,5), (3,4), (3,5)]
+    nd_range  = [ (2, d) for d in range(3, 10)] + [(3,4), (3,5), (3,6) ]
     if (len(f.variables()) - 1, f.total_degree()) not in nd_range:
         raise ValueError('for the moment we have only precomputed some internal parameters for (n, d) in %s,\nif you need to compute outside this range please email "Edgar Costa" <edgarcosta@math.dartmouth.edu>.' % nd_range)
 
