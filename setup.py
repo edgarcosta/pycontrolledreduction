@@ -22,9 +22,9 @@ class SageTest(TestCommand):
         if errno != 0:
             sys.exit(1)
 
-#if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlledreduction", "wrapper.h")):
-#    print("The controlled reduction library is not installed.")
-#    sys.exit(1)
+if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlledreduction", "wrapper.h")):
+    print("The controlled reduction library is not installed.")
+    sys.exit(1)
 
 cythonize_dir = "build"
 
@@ -38,7 +38,6 @@ extensions = [
                 'pycontrolledreduction/controlledreduction.pyx',
                 ], 
             libraries = ["gmp", "flint", "ntl", "mpir", "mpfr"], 
-            extra_compile_args = ['-std=c++11'],
             **kwds)
         ]
 
