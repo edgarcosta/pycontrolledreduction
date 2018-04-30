@@ -39,9 +39,10 @@ def controlledreduction(f, p, verbose = False):
         raise ValueError('the degree of f must be larger than the dimension of the ambient projective space')
     if  f.total_degree() % p == 0:
         raise ValueError('the total degree of f cannot be zero modulo p')
-
-    I = f.change_ring(GF(p)).jacobian_ideal().radical()
-    if I != Ideal(I.gens()):
+    
+    fp = f.change_ring(GF(p))
+    I = fp.jacobian_ideal().radical()
+    if I != Ideal(fp.parent().gens()):
         raise ValueError('f is not smooth modulo p')
 
     nd_range  = [ (2, d) for d in range(3, 10)] + [(3,4), (3,5), (3,6) ]
