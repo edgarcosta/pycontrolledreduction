@@ -57,11 +57,12 @@ def controlledreduction(f, p, verbose = False, threads = 1):
         keys.push_back(mvec)
     cdef ntl_ZZX zeta = ntl_ZZX()
     cdef int cverbose = int(verbose);
+    cdef int cthread = int(thread);
 
     assert int(threads) > 0
     
     sig_on()
-    zeta_function(zeta.x, keys, coef, p, cverbose, int(threads))
+    zeta_function(zeta.x, keys, coef, p, cverbose, cthread)
     sig_off()
     # convert zeta to a sage polynomial
     poly=[]
