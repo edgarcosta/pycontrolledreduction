@@ -9,7 +9,7 @@ from sage.rings.integer_ring import ZZ
 from sage.all import PolynomialRing, Ideal, GF
 from sage.libs.ntl.ntl_ZZX cimport ntl_ZZX
 
-def controlledreduction(f, p, verbose = False):
+def controlledreduction(f, p, verbose = False, threads = 1):
     r"""
     Input: 
         -- ``f`` -- a homogeneous polynomial in ``n + 1`` variables with total degree ``d`` with ``d > n``
@@ -56,9 +56,11 @@ def controlledreduction(f, p, verbose = False):
         keys.push_back(mvec)
     cdef ntl_ZZX zeta = ntl_ZZX()
     cdef int cverbose = int(verbose);
+
+    assert int(threads) > 0
     
     sig_on()
-    zeta_function(zeta.x, keys, coef, p, cverbose)
+    zeta_function(zeta.x, keys, coef, p, cverbose, int(threads))
     sig_off()
     # convert zeta to a sage polynomial
     poly=[]
