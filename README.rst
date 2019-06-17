@@ -6,8 +6,10 @@ This package is a simple wrapper to integrate Edgar Costa's controlled reduction
 
 
 ============
+Install
+============
 
-Install ``controlled-reduction``
+1- Install ``controlled-reduction``
 
 ::
 
@@ -17,7 +19,7 @@ Install ``controlled-reduction``
   ./configure --prefix=$SAGE_LOCAL && make install
 
 
-then use pip to install ``pycontrolledreduction``
+2- use pip to install ``pycontrolledreduction``
 
 ::
 
