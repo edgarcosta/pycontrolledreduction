@@ -23,7 +23,7 @@ def controlledreduction(f, p, verbose = False, threads = 1):
     sage: from pycontrolledreduction import controlledreduction
 
     sage: R.<x,y,z,w> = ZZ[];
-    sage: controlledreduction(x^4 + y^4 + z^4 + w^4 + 1*x*y*z*w, 11, False)  # long time
+    sage: controlledreduction(x^4 + y^4 + z^4 + w^4 + 1*x*y*z*w, 11, False).factor()  # long time
     (-1) * (11*T + 1)^6 * (11*T - 1)^13 * (121*T^2 + 18*T + 1)
     
     sage: R.<x,y,z> = ZZ[];
