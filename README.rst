@@ -17,7 +17,8 @@ Install ``controlled-reduction``
   ./configure --prefix=$SAGE_LOCAL && make install
 
 
-then use pip to install `pycontrolledreduction`
+then use pip to install ``pycontrolledreduction``
 
 ::
+
   sage -pip install --upgrade git+https://github.com/edgarcosta/pycontrolledreduction.git@master#egg=pycontrolledreduction
