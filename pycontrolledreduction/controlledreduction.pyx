@@ -6,7 +6,7 @@
 
 from cysignals.signals cimport sig_on, sig_off
 from sage.rings.integer_ring import ZZ
-from sage.all import PolynomialRing, Ideal, GF
+from sage.all import PolynomialRing, Ideal, GF, matrix
 from sage.libs.ntl.ntl_ZZX cimport ntl_ZZX
 from sage.libs.ntl.ntl_mat_ZZ cimport ntl_mat_ZZ
 
