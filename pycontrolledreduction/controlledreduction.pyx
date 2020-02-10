@@ -13,6 +13,7 @@ from sage.libs.ntl.ntl_mat_ZZ cimport ntl_mat_ZZ
 def controlledreduction(
     f,
     p,
+    frob_matrix=False,
     verbose=False,
     threads=1,
     min_abs_precision=0,
@@ -23,9 +24,9 @@ def controlledreduction(
     Input:
         -- ``f`` -- a homogeneous polynomial in ``n + 1`` variables with total degree ``d`` with ``d > n``
         -- ``p`` -- a prime of good reduction that does not divide ``d``
+        -- ``frob_matrix`` -- a boolean, if the fucntion should also return the Frobenius matrix
         -- ``verbose`` -- a boolean enabling/disabling verbosity of controlled reduction library
         -- ``threads`` -- the number of threads that controlled reduction library should use
-        --  ``frob_matrix`` -- a boolean, if the fucntion should also return the Frobenius matrix
         -- ``min_abs_precision`` -- the desired minimum absolute precision for Frob
         -- ``find_better_model`` -- a bolean, if one should try to find a non-degenerate model, this usually speeds up the overall computation
     Output:
