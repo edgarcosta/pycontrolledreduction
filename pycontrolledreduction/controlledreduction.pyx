@@ -65,7 +65,7 @@ def controlledreduction(
 
     cdef vector[int64_t] coef
     cdef vector[ vector[int64_t] ] keys
-    for mvec, c in f.dict().iteritems()
+    for mvec, c in f.dict().items():
         coef.push_back(c % p)
         keys.push_back(mvec)
     cdef ntl_ZZX zeta = ntl_ZZX()
