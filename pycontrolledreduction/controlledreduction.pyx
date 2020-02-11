@@ -21,16 +21,27 @@ def controlledreduction(
 ):
 
     r"""
-    Input:
-        -- ``f`` -- a homogeneous polynomial in ``n + 1`` variables with total degree ``d`` with ``d > n``
-        -- ``p`` -- a prime of good reduction that does not divide ``d``
-        -- ``frob_matrix`` -- a boolean, if the fucntion should also return the Frobenius matrix
-        -- ``verbose`` -- a boolean enabling/disabling verbosity of controlled reduction library
-        -- ``threads`` -- the number of threads that controlled reduction library should use
-        -- ``min_abs_precision`` -- the desired minimum absolute precision for Frob
-        -- ``find_better_model`` -- a bolean, if one should try to find a non-degenerate model, this usually speeds up the overall computation
-    Output:
-        The characteristic polynomial of Frobenius acting on the $n$-th cohomology group of the complement of the hypersurface defined by f over F_p.
+    INPUT:
+
+    - ``f`` -- a homogeneous polynomial in ``n + 1`` variables with total degree ``d`` with ``d > n``
+
+    - ``p`` -- a prime of good reduction that does not divide ``d``
+
+    - ``frob_matrix`` -- a boolean, if the fucntion should also return the Frobenius matrix
+
+    - ``verbose`` -- a boolean enabling/disabling verbosity of controlled reduction library
+
+    - ``threads`` -- the number of threads that controlled reduction library should use
+
+    - ``min_abs_precision`` -- the desired minimum absolute precision for Frob
+
+    - ``find_better_model`` -- a bolean, if one should try to find a non-degenerate model, this usually speeds up the overall computation
+
+    OUTPUT:
+
+    - The characteristic polynomial of Frobenius acting on the $n$-th cohomology group of the complement of the hypersurface defined by f over F_p.
+
+    - If ``frob_matrix = True``, a p-adic approximation of the matrix representing Frobenius acting on the $n$-th cohomology group of the complement of the hypersurface defined by f over F_p
 
     Examples::
 
