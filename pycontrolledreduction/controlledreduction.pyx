@@ -88,7 +88,7 @@ def controlledreduction(
         F = matrix(zeta.degree(), zeta.degree())
         for i in range(zeta.degree()):
             for j in range(zeta.degree()):
-                F[i, j] = frob[i][j]._integer_()
+                F[i, j] = frob[i, j]._integer_()
         return poly, F
     else:
         return poly
