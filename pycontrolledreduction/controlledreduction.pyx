@@ -85,10 +85,12 @@ def controlledreduction(
     poly_vec = [zeta[i]._integer_() for i in range(zeta.degree()+1)]
     poly = PolynomialRing(ZZ, 'T')(poly_vec).reverse()
     if frob_matrix:
+        frob.__ncols = frob.__nrows = frob.x.NumCols()
         F = matrix(zeta.degree(), zeta.degree())
         for i in range(zeta.degree()):
             for j in range(zeta.degree()):
-                F[i, j] = frob[i, j]._integer_()
+                foo = frob[(i, j)]._integer_()
+                F[i, j] = foo
         return poly, F
     else:
         return poly
