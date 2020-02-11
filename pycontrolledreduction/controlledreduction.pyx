@@ -82,15 +82,13 @@ def controlledreduction(
     zeta_function(zeta.x, frob.x, keys, coef, p, cverbose, cthreads, cmin_abs_precision, cfind_better_model)
     sig_off()
     # convert zeta to a sage polynomial
-    poly=[]
-    for i in range(zeta.degree()+1):
-        poly.append(zeta[i]._integer_())
-    zeta = PolynomialRing(ZZ, 'T')(poly).reverse()
+    poly_vec = [zeta[i]._integer_() for i in range(zeta.degree()+1)]
+    poly = PolynomialRing(ZZ, 'T')(poly_vec).reverse()
     if frob_matrix:
         F = matrix(zeta.degree(), zeta.degree())
         for i in range(zeta.degree()):
             for j in range(zeta.degree()):
                 F[i, j] = frob[i][j]._integer_()
-        return zeta, F
+        return poly, F
     else:
-        return zeta
+        return poly
