@@ -78,7 +78,7 @@ def controlledreduction(
     cdef vector[int64_t] coef
     cdef vector[ vector[int64_t] ] keys
     for mvec, c in f.dict().items():
-        coef.push_back(c % p)
+        coef.push_back(c)
         keys.push_back(mvec)
     cdef ntl_ZZX zeta = ntl_ZZX()
     cdef ntl_mat_ZZ frob = ntl_mat_ZZ()
