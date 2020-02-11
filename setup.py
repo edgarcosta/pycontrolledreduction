@@ -36,8 +36,8 @@ extensions = [
             language="c++",
             sources = [
                 'pycontrolledreduction/controlledreduction.pyx',
-                ], 
-            libraries = ["gmp", "flint", "ntl", "mpir", "mpfr"], 
+                ],
+            libraries = ["controlledreduction", "gmp", "flint", "ntl", "mpir", "mpfr", ],
             extra_compile_args=["-std=c++11"],
             extra_link_args=["-std=c++11"],
             **kwds)
