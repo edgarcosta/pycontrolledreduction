@@ -17,14 +17,6 @@ def readfile(filename):
     with open(filename,  encoding='utf-8') as f:
         return f.read()
 
-#class CustomInstall(install):
-#    def run(self):
-#        command = "git clone https://github.com/edgarcosta/controlledreduction.git"
-#        print(command)
-#        process = subprocess.Popen(command, shell=True, cwd="pycontrolledreduction")
-#        process.wait()
-#        install.run(self)
-
 # For the tests
 class SageTest(TestCommand):
     def run_tests(self):
@@ -32,9 +24,6 @@ class SageTest(TestCommand):
         if errno != 0:
             sys.exit(1)
 
-if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlledreduction", "wrapper.h")):
-    print("The controlled reduction library is not installed.")
-    sys.exit(1)
 
 cythonize_dir = "build"
 
