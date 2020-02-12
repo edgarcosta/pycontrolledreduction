@@ -8,7 +8,7 @@ from libcpp.vector cimport vector
 from libc.stdint cimport int64_t
 from libcpp cimport bool
 
-cdef extern from "controlledreduction/wrapper.h":
+cdef extern from "lib/wrapper.h":
     void zeta_function(
         ZZX_c &zeta,
         mat_ZZ_c &frob,

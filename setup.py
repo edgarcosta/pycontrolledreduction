@@ -2,8 +2,10 @@
 ## -*- encoding: utf-8 -*-
 
 import os
+import subprocess
 import sys
 from setuptools import setup
+from setuptools.command.install import install
 from codecs import open # To open the README file with proper encoding
 from setuptools.command.test import test as TestCommand # for tests
 from setuptools.extension import Extension
@@ -14,6 +16,14 @@ from Cython.Build import cythonize
 def readfile(filename):
     with open(filename,  encoding='utf-8') as f:
         return f.read()
+
+#class CustomInstall(install):
+#    def run(self):
+#        command = "git clone https://github.com/edgarcosta/controlledreduction.git"
+#        print(command)
+#        process = subprocess.Popen(command, shell=True, cwd="pycontrolledreduction")
+#        process.wait()
+#        install.run(self)
 
 # For the tests
 class SageTest(TestCommand):
@@ -28,20 +38,72 @@ if not os.path.isfile(os.path.join(SAGE_LOCAL, "include", "controlledreduction",
 
 cythonize_dir = "build"
 
-kwds = {"include_dirs": sage_include_directories()}
 
 
-extensions = [
-        Extension('pycontrolledreduction.controlledreduction',
-            language="c++",
-            sources = [
-                'pycontrolledreduction/controlledreduction.pyx',
-                ],
-            libraries = ["controlledreduction", "gmp", "flint", "ntl", "mpir", "mpfr", ],
-            extra_compile_args=["-std=c++11"],
-            extra_link_args=["-std=c++11"],
-            **kwds)
-        ]
+controlledreduction_sources = [
+        "tools/binomial.cc",
+        "tools/default_args.cc",
+        "tools/binomial_ZZ.cc",
+        "tools/factorial_p_adic.cc",
+        "tools/tuple_list_generator.cc",
+        "tools/valuation_of_factorial.cc",
+        "tools/change_of_variables_monomial.cc",
+        "tools/geometric_picard.cc",
+        "dr/init.cc",
+        "dr/monomial_to_basis_J.cc",
+        "dr/reduce_vector_J_poly.cc",
+        "dr/get_reduction_matrix_J.cc",
+        "dr/constructors.cc",
+        "dr/get_inclusion_matrix_J.cc",
+        "dr/reduce_vector_J_ZZ.cc",
+        "dr/compute_everything_J.cc",
+        "dr/compute_reduction_matrix_J_ZZ.cc",
+        "dr/reduce_vector_J.cc",
+        "dr/get_solve_J.cc",
+        "dr/reduce_vector_J_poly_ZZ.cc",
+        "dr/get_reduction_matrix_J_ZZ.cc",
+        "dr/matrix_J.cc",
+        "dr/compute_inclusion_matrix_J.cc",
+        "dr/isSmooth.cc",
+        "dr/compute_reduction_matrix_J.cc",
+        "dr/get_final_reduction_matrix_J.cc",
+        "dr/save.cc",
+        "dr/compute_final_reduction_matrix_J.cc",
+        "vec_int64/diff.cc",
+        "vec_int64/tweak.cc",
+        "vec_int64/tweak_step.cc",
+        "wrapper/zeta_function.cc",
+        "hypersurface/frob_J_ZZ_p.cc",
+        "hypersurface/frob_matrix_J.cc",
+        "hypersurface/constructors.cc",
+        "hypersurface/compute_fpow.cc",
+        "hypersurface/frob_J_ZZ.cc",
+        "hypersurface/save.cc",
+        "solve_system/solve_system.cc",
+        "conv/conv.cc",
+        "dr_nd/dr_nd.cc",
+        "hypersurface_nd/hypersurface_nd.cc",
+        "matrix/charpoly.cc",
+        "matrix/transpose_mul_tranpose.cc",
+        "matrix/mul_tranpose.cc",
+        "matrix/mul.cc",
+        "matrix/random_SL_matric.cc",
+        "matrix/trace.cc",
+        "matrix/charpoly_frob.cc"
+    ]
+
+pycontrolledreduction = Extension('pycontrolledreduction.controlledreduction',
+                                  language="c++",
+                                  sources=[
+                                      'pycontrolledreduction/controlledreduction.pyx',
+                                  ] + [
+                                      'pycontrolledreduction/lib/' + elt for elt in controlledreduction_sources
+                                  ],
+                                  libraries=["gmp", "flint", "ntl"],
+                                  extra_compile_args=["-std=c++11"],
+                                  extra_link_args=["-std=c++11"],
+                                  include_dirs=sage_include_directories() + ['pycontrolledreduction/lib/']
+                                  )
 
 setup(
     name="pycontrolledreduction",
@@ -68,7 +130,7 @@ setup(
     install_requires=["cython", "sagemath"],
     packages=["pycontrolledreduction"],
     include_package_data = True,
-    ext_modules = cythonize(extensions, language="c++"),
+    ext_modules = cythonize([pycontrolledreduction], language="c++"),
     cmdclass = {'test': SageTest} # adding a special setup command for tests
     #ext_modules = extensions,
     #cmdclass = {'test': SageTest, 'build_ext': Cython.Build.build_ext} # adding a special setup command for tests and build_ext

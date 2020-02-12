@@ -1,0 +1,3 @@
+[submodule "controlledreduction"]
+	path = controlledreduction
+	url = https://github.com/edgarcosta/controlledreduction.git
