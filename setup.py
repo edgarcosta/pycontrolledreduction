@@ -91,8 +91,8 @@ pycontrolledreduction = Extension('pycontrolledreduction.controlledreduction',
                                       'pycontrolledreduction/lib/' + elt for elt in controlledreduction_sources
                                   ],
                                   libraries=["gmp", "flint", "ntl", "omp"],
-                                  extra_compile_args=["-std=c++11"] #, openmpflag],
-                                  extra_link_args=["-std=c++11"] #, openmpflag],
+                                  extra_compile_args=["-std=c++11"], #, openmpflag],
+                                  extra_link_args=["-std=c++11"], #, openmpflag],
                                   include_dirs=sage_include_directories() + ['pycontrolledreduction/lib/']
                                   )
 
