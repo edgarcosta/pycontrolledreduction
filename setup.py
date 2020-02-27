@@ -81,7 +81,7 @@ controlledreduction_sources = [
         "matrix/charpoly_frob.cc"
     ]
 
-openmpflag = "-openmp" if sys.plattform == "darwin" else "-fopenmp"
+openmpflag = "-openmp" if sys.platform == "darwin" else "-fopenmp"
 
 pycontrolledreduction = Extension('pycontrolledreduction.controlledreduction',
                                   sources=[
