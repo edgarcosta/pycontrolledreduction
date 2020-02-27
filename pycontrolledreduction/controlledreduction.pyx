@@ -1,5 +1,4 @@
 # distutils: language = c++
-# distutils: libraries = omp ntl
 # clang c++
 # Copyright 2017 Jennifer Balakrishnan, Edgar Costa
 # See LICENSE file for license details.
