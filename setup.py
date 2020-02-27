@@ -84,6 +84,7 @@ controlledreduction_sources = [
 openmpflag = "-openmp" if sys.platform == "darwin" else "-fopenmp"
 
 pycontrolledreduction = Extension('pycontrolledreduction.controlledreduction',
+                                  language="c++",
                                   sources=[
                                       'pycontrolledreduction/controlledreduction.pyx',
                                   ] + [
