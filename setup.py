@@ -81,7 +81,7 @@ controlledreduction_sources = [
         "matrix/charpoly_frob.cc"
     ]
 
-openmpflag = "-fopenmp" #if sys.platform == "darwin" else "-fopenmp"
+openmpflag = "-openmp" if sys.platform == "darwin" else "-fopenmp"
 
 pycontrolledreduction = Extension('pycontrolledreduction.controlledreduction',
                                   language="c++",
@@ -92,7 +92,7 @@ pycontrolledreduction = Extension('pycontrolledreduction.controlledreduction',
                                   ],
                                   libraries=["gmp", "flint", "ntl", "omp"],
                                   extra_compile_args=["-std=c++11", openmpflag],
-                                  extra_link_args=["-std=c++11", openmpflag],
+                                  extra_link_args=["-std=c++11"],
                                   include_dirs=sage_include_directories() + ['pycontrolledreduction/lib/']
                                   )
 
