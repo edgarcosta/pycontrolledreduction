@@ -1,4 +1,5 @@
 # distutils: language = c++
+# distutils: libraries = omp ntl
 # clang c++
 # Copyright 2017 Jennifer Balakrishnan, Edgar Costa
 # See LICENSE file for license details.
@@ -17,7 +18,7 @@ def controlledreduction(
     verbose=False,
     threads=1,
     min_abs_precision=0,
-    find_better_model=False
+    find_better_model=True
 ):
 
     r"""
