@@ -2,14 +2,12 @@
 ## -*- encoding: utf-8 -*-
 
 import os
-import subprocess
 import sys
 from setuptools import setup
-from setuptools.command.install import install
 from codecs import open # To open the README file with proper encoding
 from setuptools.command.test import test as TestCommand # for tests
 from setuptools.extension import Extension
-from sage.env import sage_include_directories, SAGE_LOCAL
+from sage.env import sage_include_directories
 from Cython.Build import cythonize
 
 # Get information from separate files (README, VERSION)
@@ -114,11 +112,11 @@ setup(
       'Intended Audience :: Science/Research',
       'Topic :: Scientific/Engineering :: Mathematics',
       'License :: OSI Approved :: GNU General Public License v2 or v3',
-      'Programming Language :: Python :: 2.7',
+      'Programming Language :: Python :: 3.7',
     ], # classifiers list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords = "sagemath controlled reduction",
     setup_requires=["cython", "sagemath"], # currently useless, see https://www.python.org/dev/peps/pep-0518/
-    install_requires=["cython", "sagemath"],
+    install_requires=["cython", "sagemath", "sphinx"],
     packages=["pycontrolledreduction"],
     include_package_data = True,
     ext_modules = cythonize([pycontrolledreduction], language="c++"),
