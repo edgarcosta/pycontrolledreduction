@@ -7,6 +7,8 @@
 from cysignals.signals cimport sig_on, sig_off
 from sage.rings.integer_ring import ZZ
 from sage.all import PolynomialRing, Ideal, GF, matrix
+from sage.libs.ntl.types cimport ZZ_c
+from sage.libs.ntl.ntl_ZZ cimport ntl_ZZ
 from sage.libs.ntl.ntl_ZZX cimport ntl_ZZX
 from sage.libs.ntl.ntl_mat_ZZ cimport ntl_mat_ZZ
 
@@ -75,10 +77,10 @@ def controlledreduction(
         raise ValueError('for the moment we have only precomputed some internal parameters for (n, d) in %s,\nif you need to compute outside this range please email "Edgar Costa" <edgarcosta@math.dartmouth.edu>.' % nd_range)
 
 
-    cdef vector[int64_t] coef
+    cdef vector[ ZZ_c ] coef
     cdef vector[ vector[int64_t] ] keys
     for mvec, c in f.dict().items():
-        coef.push_back(c)
+        coef.push_back(ntl_ZZ(c).x)
         keys.push_back(mvec)
     cdef ntl_ZZX zeta = ntl_ZZX()
     cdef ntl_mat_ZZ frob = ntl_mat_ZZ()
