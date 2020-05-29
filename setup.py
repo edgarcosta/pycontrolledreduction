@@ -101,7 +101,7 @@ setup(
     url="https://github.com/edgarcosta/pycontrolledreduction",
     license="GNU General Public License, version 2 or 3",
     description="Wrapper for controlled reduction library by Edgar Costa",
-    long_description = readfile("README.rst"), # get the long description from the README
+    long_description = readfile("README.md"), # get the long description from the README
     version = readfile("VERSION"), # the VERSION file is shared with the documentation
     classifiers=[
       # How mature is this project? Common values are
