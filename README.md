@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/edgarcosta/pycontrolledreduction.svg?branch=master)](https://travis-ci.org/edgarcosta/pycontrolledreduction)
 
 This package is a simple wrapper to integrate most of [controlled reduction](https://github.com/edgarcosta/controlledreduction/) library code into SageMath.
+Given an hypersurface it computes the characteristic polynomial (and matrix) of the Frobenius action on the primitive cohomology group.
 
 
 
