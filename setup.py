@@ -118,7 +118,7 @@ setup(
     setup_requires=["cython", "sagemath"], # currently useless, see https://www.python.org/dev/peps/pep-0518/
     install_requires=["cython", "sagemath", "sphinx"],
     packages=["pycontrolledreduction"],
-    include_package_data = True,
+    include_package_data = False,
     ext_modules = cythonize([pycontrolledreduction], language="c++"),
     cmdclass = {'test': SageTest} # adding a special setup command for tests
     #ext_modules = extensions,
