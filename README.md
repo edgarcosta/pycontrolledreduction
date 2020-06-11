@@ -28,6 +28,7 @@ sage -pip install --user --upgrade git+https://github.com/edgarcosta/pycontrolle
 
 ### Plane curves
 ```
+sage: from pycontrolledreduction import controlledreduction
 sage: R.<x,y,z> = ZZ[]
 sage: controlledreduction(x^4 + y^4 + z^4 + 1*x^2*y*z, next_prime(10000), False).factor()
 (10007*T^2 - 192*T + 1) * (10007*T^2 - 128*T + 1) * (10007*T^2 + 192*T + 1)
