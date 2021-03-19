@@ -4,6 +4,8 @@
 
 This package is a simple wrapper to integrate most of [controlled reduction](https://github.com/edgarcosta/controlledreduction/) library code into SageMath.
 
+Given an hypersurface it computes the characteristic polynomial (and matrix) of the Frobenius action on the primitive cohomology group.
+
 
 
 ## Install
@@ -24,12 +26,9 @@ sage -pip install --user --upgrade git+https://github.com/edgarcosta/pycontrolle
 
 ## Examples
 
-
+### Plane curves
 ```
 sage: from pycontrolledreduction import controlledreduction
-sage: R.<x,y,z,w> = ZZ[]
-sage: controlledreduction(x^4 + y^4 + z^4 + w^4 + 1*x*y*z*w, 11, False).factor()  # long time
-(-1) * (11*T + 1)^6 * (11*T - 1)^13 * (121*T^2 + 18*T + 1)
 sage: R.<x,y,z> = ZZ[]
 sage: controlledreduction(x^4 + y^4 + z^4 + 1*x^2*y*z, next_prime(10000), False).factor()
 (10007*T^2 - 192*T + 1) * (10007*T^2 - 128*T + 1) * (10007*T^2 + 192*T + 1)
@@ -37,3 +36,16 @@ sage: controlledreduction(y^2*z + y*z^2 - (x^3 + y*x^2 -2*x*z^2), 97, false).lis
 True
 
 ```
+
+### K3 surfaces
+
+Note: that the polynomial has degree 21, as we are omiting the factor `(1-p*T)` coming from the polarisation.
+```
+sage: from pycontrolledreduction import controlledreduction
+sage: R.<x,y,z,w> = ZZ[]
+sage: controlledreduction(x^4 + y^4 + z^4 + w^4 + x*y*z*w, 11, False).factor()  # long time
+(-1) * (11*T + 1)^6 * (11*T - 1)^13 * (121*T^2 + 18*T + 1)
+sage: controlledreduction(x^4 + y^4 + z^4 + w^4 + x*y*z*w, 23, False).factor()  # long time
+(-1) * (23*T - 1)^9 * (23*T + 1)^10 * (529*T^2 - 38*T + 1)
+```
+
