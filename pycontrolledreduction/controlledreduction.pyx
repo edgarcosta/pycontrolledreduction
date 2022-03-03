@@ -19,6 +19,7 @@ def controlledreduction(
     verbose=False,
     threads=1,
     min_abs_precision=0,
+    increase_precision_to_deduce_zeta=True,
     find_better_model=True
 ):
 
@@ -37,7 +38,9 @@ def controlledreduction(
 
     - ``min_abs_precision`` -- the desired minimum absolute precision for Frob
 
-    - ``find_better_model`` -- a bolean, if one should try to find a non-degenerate model, this usually speeds up the overall computation
+    - ``increase_precision_to_deduce_zeta`` - if one should increase the precision to deduce the zeta function
+
+    - ``find_better_model`` -- a boolean, if one should try to find a non-degenerate model, this usually speeds up the overall computation
 
     OUTPUT:
 
@@ -86,13 +89,24 @@ def controlledreduction(
     cdef ntl_mat_ZZ frob = ntl_mat_ZZ()
     cdef int cverbose = int(verbose)
     cdef int cthreads = int(threads)
-    cdef int cmin_abs_precision = int(min_abs_precision)
+    # we keep min_abs_precision for backwards compatibility
+    cdef int cabs_precision = int(min_abs_precision)
+    cdef int cincrease_precision_to_deduce_zeta = int(increase_precision_to_deduce_zeta)
     cdef int cfind_better_model = int(find_better_model)
 
     assert int(threads) > 0
 
     sig_on()
-    zeta_function(zeta.x, frob.x, keys, coef, p, cverbose, cthreads, cmin_abs_precision, cfind_better_model)
+    zeta_function(zeta.x,
+                  frob.x,
+                  keys,
+                  coef,
+                  p,
+                  cverbose,
+                  cthreads,
+                  cabs_precision,
+                  cincrease_precision_to_deduce_zeta,
+                  cfind_better_model)
     sig_off()
     # convert zeta to a sage polynomial
     poly_vec = [zeta[i]._integer_() for i in range(zeta.degree()+1)]

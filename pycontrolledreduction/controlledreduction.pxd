@@ -17,6 +17,7 @@ cdef extern from "lib/wrapper.h":
         const int64_t &p,
         const bool &verbose,
         const int &thread,
-        const int &min_abs_precision,
-        const int &find_better_model
+        const int &abs_precision,
+        const bool &increase_precision_to_deduce_zeta,
+        const bool &find_better_model
     );
