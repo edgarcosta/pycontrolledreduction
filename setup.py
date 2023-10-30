@@ -8,7 +8,15 @@ from codecs import open # To open the README file with proper encoding
 from setuptools.command.test import test as TestCommand # for tests
 from setuptools.extension import Extension
 from sage.env import sage_include_directories
-from Cython.Build import cythonize
+from Cython.Build import cythonize as cython_cythonize
+
+try:
+    from sage.misc.package_dir import cython_namespace_package_support
+    def cythonize(*args, **kwargs):
+        with cython_namespace_package_support():
+            return cython_cythonize(*args, **kwargs)
+except ImportError:
+    cythonize = cython_cythonize
 
 # Get information from separate files (README, VERSION)
 def readfile(filename):
@@ -102,7 +110,7 @@ setup(
     license="GNU General Public License, version 2 or 3",
     description="Wrapper for controlled reduction library by Edgar Costa",
     long_description = readfile("README.md"), # get the long description from the README
-    version = readfile("VERSION"), # the VERSION file is shared with the documentation
+    version = readfile("VERSION").strip(), # the VERSION file is shared with the documentation
     classifiers=[
       # How mature is this project? Common values are
       #   3 - Alpha
