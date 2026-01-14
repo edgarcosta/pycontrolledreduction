@@ -7,16 +7,57 @@ from setuptools import setup
 from codecs import open # To open the README file with proper encoding
 from setuptools.command.test import test as TestCommand # for tests
 from setuptools.extension import Extension
-from sage.env import sage_include_directories
-from Cython.Build import cythonize as cython_cythonize
 
 try:
-    from sage.misc.package_dir import cython_namespace_package_support
-    def cythonize(*args, **kwargs):
-        with cython_namespace_package_support():
-            return cython_cythonize(*args, **kwargs)
+    from Cython.Build import cythonize as cython_cythonize
 except ImportError:
-    cythonize = cython_cythonize
+    cython_cythonize = None
+
+def _sage_include_directories():
+    try:
+        from sage.env import sage_include_directories
+        return sage_include_directories()
+    except Exception:
+        include_dirs = []
+        sage_local = os.environ.get("SAGE_LOCAL")
+        if sage_local:
+            include_dirs.append(os.path.join(sage_local, "include"))
+        sage_root = os.environ.get("SAGE_ROOT")
+        if sage_root:
+            include_dirs.append(os.path.join(sage_root, "src"))
+        if not include_dirs:
+            raise RuntimeError(
+                "Sage include directories not found. "
+                "Run inside Sage or set SAGE_LOCAL/SAGE_ROOT."
+            )
+        return include_dirs
+
+def _sage_library_directories():
+    library_dirs = []
+    sage_local = os.environ.get("SAGE_LOCAL")
+    if not sage_local:
+        return library_dirs
+    for libdir in ("lib", "lib64"):
+        candidate = os.path.join(sage_local, libdir)
+        if os.path.isdir(candidate):
+            library_dirs.append(candidate)
+    return library_dirs
+
+def _openmp_enabled(include_dirs):
+    if os.environ.get("PYCONTROLLEDREDUCTION_OPENMP") == "0":
+        return False
+    for include_dir in include_dirs:
+        if os.path.exists(os.path.join(include_dir, "omp.h")):
+            return True
+    return False
+
+def cythonize(*args, **kwargs):
+    try:
+        from sage.misc.package_dir import cython_namespace_package_support
+    except ImportError:
+        return cython_cythonize(*args, **kwargs)
+    with cython_namespace_package_support():
+        return cython_cythonize(*args, **kwargs)
 
 # Get information from separate files (README, VERSION)
 def readfile(filename):
@@ -86,20 +127,27 @@ controlledreduction_sources = [
         "matrix/trace.cc",
         "matrix/charpoly_frob.cc"
     ]
-libopenmp = ["omp"] if sys.platform == "darwin" else []
-openmpflags = ["-Xpreprocessor", "-fopenmp"] if sys.platform == "darwin" else ["-fopenmp"]
+include_dirs = _sage_include_directories() + ['pycontrolledreduction/lib/']
+use_openmp = _openmp_enabled(include_dirs)
+libopenmp = ["omp"] if use_openmp and sys.platform == "darwin" else []
+openmpflags = ["-Xpreprocessor", "-fopenmp"] if use_openmp and sys.platform == "darwin" else (["-fopenmp"] if use_openmp else [])
+
+pyx_source = "pycontrolledreduction/controlledreduction.pyx"
+cpp_source = "pycontrolledreduction/controlledreduction.cpp"
+use_cython = cython_cythonize is not None and os.path.exists(pyx_source)
 
 pycontrolledreduction = Extension('pycontrolledreduction.controlledreduction',
                                   language="c++",
                                   sources=[
-                                      'pycontrolledreduction/controlledreduction.pyx',
+                                      pyx_source if use_cython else cpp_source,
                                   ] + [
                                       'pycontrolledreduction/lib/' + elt for elt in controlledreduction_sources
                                   ],
                                   libraries=["gmp", "flint", "ntl"] + libopenmp,
                                   extra_compile_args=["-std=c++11"] + openmpflags,
                                   extra_link_args=["-std=c++11"] + openmpflags,
-                                  include_dirs=sage_include_directories() + ['pycontrolledreduction/lib/']
+                                  include_dirs=include_dirs,
+                                  library_dirs=_sage_library_directories(),
                                   )
 
 setup(
@@ -123,11 +171,11 @@ setup(
       'Programming Language :: Python :: 3.7',
     ], # classifiers list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords = "sagemath controlled reduction",
-    setup_requires=["cython", "sagemath"], # currently useless, see https://www.python.org/dev/peps/pep-0518/
-    install_requires=["cython", "sagemath", "sphinx"],
+    setup_requires=[],
+    install_requires=[],
     packages=["pycontrolledreduction"],
     include_package_data = False,
-    ext_modules = cythonize([pycontrolledreduction], language="c++"),
+    ext_modules = cythonize([pycontrolledreduction], language="c++") if use_cython else [pycontrolledreduction],
     cmdclass = {'test': SageTest} # adding a special setup command for tests
     #ext_modules = extensions,
     #cmdclass = {'test': SageTest, 'build_ext': Cython.Build.build_ext} # adding a special setup command for tests and build_ext
