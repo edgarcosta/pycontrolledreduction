@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  examples:
+    runs-on: ubuntu-latest
+    container:
+      image: sagemath/sagemath:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install package
+        run: |
+          sage -pip install --upgrade pip
+          sage -pip install -e .
+      - name: Run README examples
+        run: |
+          cat <<'SAGE' > /tmp/examples.sage
+          from pycontrolledreduction import controlledreduction
+
+          T = polygen(ZZ, 'T')
+
+          R.<x,y,z> = ZZ[]
+          expected = (10007*T^2 - 192*T + 1) * (10007*T^2 - 128*T + 1) * (10007*T^2 + 192*T + 1)
+          assert controlledreduction(x^4 + y^4 + z^4 + 1*x^2*y*z, next_prime(10000), False).factor() == expected
+          assert controlledreduction(y^2*z + y*z^2 - (x^3 + y*x^2 -2*x*z^2), 97, False).list() == \
+              EllipticCurve([0, 1, 1, -2, 0]).change_ring(GF(97)).frobenius_polynomial().reverse().list()
+
+          R.<x,y,z,w> = ZZ[]
+          expected = (-1) * (11*T + 1)^6 * (11*T - 1)^13 * (121*T^2 + 18*T + 1)
+          assert controlledreduction(x^4 + y^4 + z^4 + w^4 + x*y*z*w, 11, False).factor() == expected
+          expected = (-1) * (23*T - 1)^9 * (23*T + 1)^10 * (529*T^2 - 38*T + 1)
+          assert controlledreduction(x^4 + y^4 + z^4 + w^4 + x*y*z*w, 23, False).factor() == expected
+
+          print("All examples passed")
+          SAGE
+          sage /tmp/examples.sage
