@@ -15,7 +15,7 @@ jobs:
       - name: Install package
         run: |
           sage -pip install --upgrade pip
-          sage -pip install -e .
+          sage -pip install --no-build-isolation --no-use-pep517 .
       - name: Run README examples
         run: |
           cat <<'SAGE' > /tmp/examples.sage
