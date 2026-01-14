@@ -1,0 +1,4 @@
+include README.md
+include VERSION
+recursive-include pycontrolledreduction *.pyx *.pxd *.pxi *.h *.hpp *.c *.cc *.cpp
+recursive-include pycontrolledreduction/lib *

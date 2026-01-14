@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 3 * * 0"
+
+jobs:
+  examples:
+    runs-on: ubuntu-latest
+    env:
+      SAGE_IMAGE: sagemath/sagemath:latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install package
+        run: |
+          docker run --rm -u root \
+            -v "$PWD":/work -w /work \
+            --entrypoint bash \
+            "$SAGE_IMAGE" \
+            -lc "sage -pip install --upgrade pip && sage -python setup.py build_ext --inplace"
+      - name: Run Sage doctests
+        run: |
+          docker run --rm -u root \
+            -v "$PWD":/work -w /work \
+            --entrypoint bash \
+            "$SAGE_IMAGE" \
+            -lc "PYTHONPATH=/work sage -t --force-lib pycontrolledreduction/controlledreduction.pyx"

@@ -127,7 +127,10 @@ controlledreduction_sources = [
         "matrix/trace.cc",
         "matrix/charpoly_frob.cc"
     ]
-include_dirs = _sage_include_directories() + ['pycontrolledreduction/lib/']
+include_dirs = _sage_include_directories() + [
+    'pycontrolledreduction',
+    'pycontrolledreduction/lib/',
+]
 use_openmp = _openmp_enabled(include_dirs)
 libopenmp = ["omp"] if use_openmp and sys.platform == "darwin" else []
 openmpflags = ["-Xpreprocessor", "-fopenmp"] if use_openmp and sys.platform == "darwin" else (["-fopenmp"] if use_openmp else [])
@@ -174,7 +177,7 @@ setup(
     setup_requires=[],
     install_requires=[],
     packages=["pycontrolledreduction"],
-    include_package_data = False,
+    include_package_data = True,
     ext_modules = cythonize([pycontrolledreduction], language="c++") if use_cython else [pycontrolledreduction],
     cmdclass = {'test': SageTest} # adding a special setup command for tests
     #ext_modules = extensions,
