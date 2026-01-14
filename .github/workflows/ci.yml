@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: sagemath/sagemath:latest
+      options: --user root
     steps:
       - uses: actions/checkout@v4
       - name: Install package
