@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: readme-examples
+        name: Run make examples
+        entry: make examples
+        language: system
+        pass_filenames: false
+        files: ^(pycontrolledreduction/controlledreduction\.pyx|README\.md|tools/update_readme_examples\.py)$

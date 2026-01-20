@@ -41,6 +41,9 @@ doc-pdf:
 readme-examples:
 	python3 tools/update_readme_examples.py
 
+examples:
+	python3 tools/update_readme_examples.py --check
+
 clean: clean-doc
 	rm -rf build dist *.egg-info
 	rm -rf $(PACKAGE)/*.c
@@ -48,4 +51,4 @@ clean: clean-doc
 clean-doc:
 	cd docs && make clean
 
-.PHONY: all build install test coverage sdist pip-install pip-uninstall pip-develop clean clean-doc doc doc-pdf readme-examples
+.PHONY: all build install test coverage sdist pip-install pip-uninstall pip-develop clean clean-doc doc doc-pdf readme-examples examples
