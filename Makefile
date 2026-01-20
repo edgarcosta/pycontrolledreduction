@@ -38,6 +38,9 @@ doc:
 doc-pdf:
 	cd docs && $(SAGE) -sh -c "make latexpdf"
 
+readme-examples:
+	python3 tools/update_readme_examples.py
+
 clean: clean-doc
 	rm -rf build dist *.egg-info
 	rm -rf $(PACKAGE)/*.c
@@ -45,4 +48,4 @@ clean: clean-doc
 clean-doc:
 	cd docs && make clean
 
-.PHONY: all build install test coverage sdist pip-install pip-uninstall pip-develop clean clean-doc doc doc-pdf
+.PHONY: all build install test coverage sdist pip-install pip-uninstall pip-develop clean clean-doc doc doc-pdf readme-examples

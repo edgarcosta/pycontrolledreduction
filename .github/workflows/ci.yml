@@ -15,6 +15,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+      - name: Ensure README examples are synced
+        run: |
+          python3 tools/update_readme_examples.py --check
       - name: Install package
         run: |
           docker run --rm -u root \
