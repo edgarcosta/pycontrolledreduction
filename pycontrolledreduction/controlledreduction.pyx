@@ -66,9 +66,18 @@ def controlledreduction(
     sage: controlledreduction(y^2*z - x^3 - x*z^2 - z^3, 101, False).list() == EllipticCurve([0, 0, 0, -1, -1]).change_ring(GF(101)).frobenius_polynomial().reverse().list()
     True
 
+    sage: poly = controlledreduction(y^2*z + y*z^2 - (x^3 + y*x^2 -2*x*z^2), 97, False)
+    sage: poly_low = controlledreduction(y^2*z + y*z^2 - (x^3 + y*x^2 -2*x*z^2), 97, False, min_abs_precision=1, increase_precision_to_deduce_zeta=False)
+    sage: poly == poly_low == EllipticCurve([0, 1, 1, -2, 0]).change_ring(GF(97)).frobenius_polynomial().reverse()
+    True
+
     sage: poly = controlledreduction(x^4 + y^4 + z^4, 5, False)
     sage: poly.degree()
     6
+
+    sage: poly, F = controlledreduction(x^4 + y^4 + z^4, 5, True)
+    sage: (poly.degree(), F.nrows(), F.ncols())
+    (6, 6, 6)
     """
     if not f.is_homogeneous():
         raise ValueError('f must be homoegeneous');
